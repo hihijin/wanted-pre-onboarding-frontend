@@ -23,6 +23,7 @@ Api.interceptors.response.use(
 
 Api.interceptors.request.use(
 	(config) => {
+		axios.defaults.withCredentials = true;
 		// eslint-disable-next-line no-param-reassign
 		config.headers['Content-Type'] = 'application/json';
 		// eslint-disable-next-line no-param-reassign
