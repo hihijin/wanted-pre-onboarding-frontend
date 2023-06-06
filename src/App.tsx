@@ -1,26 +1,31 @@
+import './Global.css';
+
 import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+
+import { Route, Routes } from 'react-router-dom';
+
+import Error from './pages/Error';
+import Join from './pages/Join';
+import Landing from './pages/Landing';
+import Login from './pages/Login';
+import Todo from './pages/Todo';
+import { getLocalStorage } from './util/Localstorage';
 
 function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+	if (
+		new URL(window.location.href).pathname === '/todo' &&
+		!getLocalStorage('accessToken')
+	)
+		window.location.assign('/signin');
+	return (
+		<Routes>
+			<Route path="/" element={<Landing />} />
+			<Route path="/signup" element={<Join />} />
+			<Route path="/signin" element={<Login />} />
+			<Route path="/todo" element={<Todo />} />
+			<Route path="/error" element={<Error />} />
+		</Routes>
+	);
 }
 
 export default App;
