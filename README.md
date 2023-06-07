@@ -1,46 +1,98 @@
-# Getting Started with Create React App
+# 원티드 프리온보딩 프론트엔드 코스
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+# 1. 배포 링크
 
-## Available Scripts
+### 📌 https://hihijintodoapp.netlify.app
 
-In the project directory, you can run:
+# 2. 프로젝트 구조
 
-### `npm start`
+```bash
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+📦 src
+├── 📂 util
+│   ├── 📄 customAPI.ts
+│   ├── 📄 Localstorage.ts
+├── 📂 hooks
+├── 📂 pages
+│   ├── 📄 Landing.tsx
+│   ├── 📄 Join.tsx
+│   ├── 📄 Login.tsx
+│   ├── 📄 Todo.tsx
+│   └── 📄 Error.tsx
+└── 📄 App.tsx
+└── 📄 Index.tsx
+└── 📄 Global.css
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+```
 
-### `npm test`
+# 3. 기능 시연 GIF
+https://github.com/hihijin/wanted-pre-onboarding-frontend/assets/117073214/caf64baf-6551-4178-9e05-f7efbd01ab50
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+https://github.com/hihijin/wanted-pre-onboarding-frontend/assets/117073214/a771be4f-1cb3-4eae-a2c4-416d66f243b0
 
-### `npm run build`
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+## ⭐️ 로그인 , 회원가입
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+✅ Assignment1
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+- 이메일과 비밀번호의 유효성 검사기능 구현 (이메일 조건: @ 포함, 비밀번호 조건: 8자 이상)
+- 입력된 이메일과 비밀번호가 위 조건을 만족할 때만 버튼 활성화
 
-### `npm run eject`
+✅ Assignment2
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+- 로그인 성공시 todo 페이지로 리다이렉트
+- 응답받은 JWT는 로컬 스토리지에 저장
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+✅ Assignment3
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+- 로컬 스토리지에 토큰이 있는 상태로 / 페이지에 접속한다면 /todo 경로로 리다이렉트
+- 로컬 스토리지에 토큰이 없는 상태로 /todo페이지에 접속한다면 / 경로로 리다이렉트
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+## ⭐️ Todo List
 
-## Learn More
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+✅ Assignment4
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+- /todo경로에 접속하면 투두 리스트의 목록 확인
+- 투두 리스트의 내용과 완료 여부 표시
+- 입력창과 추가 버튼이 있고, 추가 버튼을 누르면 입력창의 내용이 새로운 투두 리스트로 추가
+
+✅ Assignment5
+
+- 투두 리스트의 수정, 삭제 기능 구현
+- 투두 리스트의 개별 아이템 우측에 수정버튼이 존재하고 해당 버튼을 누르면 수정모드가 활성화 및 내용 수정
+- 수정모드에서는 개별 아이템의 우측에 제출버튼과 취소버튼이 표시되며 해당 버튼을 통해서 수정 내용을 제출 및 취소
+- 투두 리스트의 개별 아이템 우측에 삭제버튼이 존재하고 해당 버튼을 누르면 투두 리스트가 삭제
+
+📌 추가 구현
+
+- 로그아웃 (로컬 스토리지에서 삭제)
+
+## ⭐️ 성능 최적화
+
+<img src="https://user-images.githubusercontent.com/86206374/196598915-73372383-cccb-414a-b16b-78a9f165ffab.gif" width="500" height="450"/>
+
+# 4. 프로젝트 설치 및 실행
+
+1. 프로젝트 패키지 설치
+
+```
+npm install
+```
+
+2. 프로젝트 실행
+
+```
+npm start
+```
+
+# 5. 사용 라이브러리
+
+Axios
+react-router-dom
+typescript
+styled-components
+eslint
+prettier
+
+
