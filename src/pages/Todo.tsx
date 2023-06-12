@@ -1,6 +1,6 @@
 import '../Global.css';
 
-import { useEffect, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 
 import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
@@ -130,17 +130,18 @@ function Todo() {
 	const [text, setText] = useState<string>('');
 
 	// todolist 목록 가져오기
-	useEffect(() => {
-		Api.get('/todos')
-			.then((res) => {
-				setTodos(
-					res.data.map((item: Itodo) => ({ ...item, isEditMode: false })),
-				);
-			})
-			.catch(() => {
-				navigate('/error');
-			});
+	const fetchTodos = useCallback(async () => {
+		try {
+			const res = await Api.get('/todos');
+			setTodos(res.data.map((item: Itodo) => ({ ...item, isEditMode: false })));
+		} catch (err) {
+			navigate('/error');
+		}
 	}, [navigate]);
+
+	useEffect(() => {
+		fetchTodos();
+	}, [fetchTodos]);
 
 	// todo 생성 핸들러
 	const createTodoHandler = async (e: React.FormEvent<HTMLFormElement>) => {
