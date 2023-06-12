@@ -5,8 +5,9 @@ import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 
+import Logout from '../components/Logout';
 import { Api } from '../util/customAPI';
-import { removeLocalStorage } from '../util/Localstorage';
+import { SweetAlert1 } from '../util/SweetAlert';
 
 const Main = styled.div`
 	width: 100%;
@@ -61,21 +62,6 @@ const Content = styled.div`
 				cursor: pointer;
 				background: rgba(0, 0, 0, 0.07);
 			}
-		}
-	}
-	.logoutBtn {
-		color: rgba(0, 0, 0, 0.8);
-		margin-top: 20px;
-		font-weight: bold;
-		padding: 10px 15px;
-		font-size: 12px;
-		font-weight: bold;
-		border-radius: 5px;
-		background: rgba(0, 0, 0, 0.03);
-		box-shadow: 5px 5px 5px 0px rgba(0, 0, 0, 0.09);
-		&:hover {
-			cursor: pointer;
-			background: rgba(0, 0, 0, 0.07);
 		}
 	}
 `;
@@ -213,8 +199,16 @@ function Todo() {
 	// todo 삭제 핸들러
 	const deleteHandler = async (id: number) => {
 		try {
-			await Api.delete(`/todos/${id}`);
-			setTodos((prevTodos) => prevTodos.filter((todo) => todo.id !== id));
+			const sweetAlert1 = await SweetAlert1(
+				'삭제',
+				'삭제하시겠습니까?',
+				'삭제',
+				'취소',
+			);
+			if (sweetAlert1.isConfirmed) {
+				await Api.delete(`/todos/${id}`);
+				setTodos((prevTodos) => prevTodos.filter((todo) => todo.id !== id));
+			}
 		} catch (err) {
 			navigate('/error');
 		}
@@ -234,12 +228,6 @@ function Todo() {
 		} catch (err) {
 			navigate('/error');
 		}
-	};
-
-	// 로그아웃 핸들러
-	const logoutHandler = () => {
-		removeLocalStorage('accessToken');
-		navigate('/');
 	};
 
 	// input창 리셋을 위한 value설정
@@ -295,7 +283,7 @@ function Todo() {
 										<input
 											type="checkbox"
 											className="checkInput"
-											defaultChecked={false}
+											defaultChecked={todo.isCompleted}
 										/>
 										<form onSubmit={(e) => editSubmitHandler(todo.id, e)}>
 											<input
@@ -319,9 +307,7 @@ function Todo() {
 							</li>
 						))}
 				</TodoList>
-				<button className="logoutBtn" onClick={logoutHandler}>
-					Log Out
-				</button>
+				<Logout />
 			</Content>
 		</Main>
 	);

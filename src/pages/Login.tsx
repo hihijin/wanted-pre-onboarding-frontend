@@ -1,10 +1,13 @@
 import '../Global.css';
 
-import { useNavigate } from 'react-router-dom';
+import React, { FocusEvent } from 'react';
+
+import { Link, useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 
 import { Api } from '../util/customAPI';
 import { setLocalStorage } from '../util/Localstorage';
+import { SweetAlert2 } from '../util/SweetAlert';
 
 const Main = styled.div`
 	width: 100%;
@@ -46,8 +49,23 @@ const Content = styled.div`
 				outline: none;
 			}
 		}
+		.keyUp {
+			font-size: 12px;
+			width: 98%;
+			color: #0db4f3;
+			text-align: left;
+			margin-top: 0px;
+			margin-bottom: -10px;
+			@media (max-height: 700px) {
+				margin-top: 1px;
+				margin-bottom: -15px;
+			}
+		}
+		.hide {
+			display: none;
+		}
 		button {
-			margin-top: 30px;
+			margin-top: 10px;
 			color: rgba(0, 0, 0, 0.8);
 			width: 200px;
 			font-size: 22px;
@@ -60,6 +78,19 @@ const Content = styled.div`
 				cursor: pointer;
 				background: rgba(0, 0, 0, 0.05);
 			}
+		}
+	}
+	.gotoJoin {
+		color: rgba(0, 0, 0, 0.5);
+		margin-top: 40px;
+		font-size: 13px;
+	}
+	.gotoJoinBtn {
+		color: #0db4f3;
+		font-size: 13px;
+		margin-top: 7px;
+		&:hover {
+			color: #4ec9ff;
 		}
 	}
 `;
@@ -81,33 +112,60 @@ function Login() {
 					password: el.password.value,
 				});
 				setLocalStorage('accessToken', data.data.access_token);
-				navigate('/todo');
+				const sweetAlert2 = await SweetAlert2(
+					'로그인되었습니다.',
+					'Todo List로 이동하시겠습니까?',
+				);
+				if (sweetAlert2.isConfirmed) {
+					navigate('/todo');
+				}
 			} catch (err) {
 				navigate('/error');
 			}
 		}
+	};
+
+	// input창 focus 핸들러
+	const displayNameKeyFocus = (e: FocusEvent<HTMLInputElement>) => {
+		const keyUp = e.target.previousSibling as HTMLDivElement;
+		keyUp?.classList.remove('hide');
+	};
+	// input창 blur 핸들러
+	const displayNameKeyBlur = (e: FocusEvent<HTMLInputElement>) => {
+		const keyUp = e.target.previousSibling as HTMLDivElement;
+		keyUp?.classList.add('hide');
 	};
 	return (
 		<Main>
 			<Content>
 				<div>Sign In</div>
 				<form onSubmit={(e) => signupHandler(e)}>
+					<div className="keyUp hide">Email</div>
 					<input
 						data-testid="email-input"
 						name="email"
 						placeholder="Email"
 						type="text"
+						onFocus={(e) => displayNameKeyFocus(e)}
+						onBlur={(e) => displayNameKeyBlur(e)}
 					/>
+					<div className="keyUp hide">Password</div>
 					<input
 						data-testid="password-input"
 						name="password"
 						placeholder="Password"
 						type="password"
+						onFocus={(e) => displayNameKeyFocus(e)}
+						onBlur={(e) => displayNameKeyBlur(e)}
 					/>
 					<button data-testid="signin-button" type="submit">
 						Sign In
 					</button>
 				</form>
+				<span className="gotoJoin">아직 회원가입을 안하셨나요?</span>
+				<Link to="/signup">
+					<button className="gotoJoinBtn">Join</button>
+				</Link>
 			</Content>
 		</Main>
 	);
