@@ -1,15 +1,17 @@
 import './Global.css';
 
-import React from 'react';
+import { lazy, Suspense } from 'react';
 
 import { Route, Routes } from 'react-router-dom';
 
-import Error from './pages/Error';
-import Join from './pages/Join';
-import Landing from './pages/Landing';
-import Login from './pages/Login';
-import Todo from './pages/Todo';
+import Loading from './pages/Loading';
 import { getLocalStorage } from './util/Localstorage';
+
+const Error = lazy(() => import('./pages/Error'));
+const Join = lazy(() => import('./pages/Join'));
+const Login = lazy(() => import('./pages/Login'));
+const Todo = lazy(() => import('./pages/Todo'));
+const Landing = lazy(() => import('./pages/Landing'));
 
 function App() {
 	if (
@@ -18,13 +20,15 @@ function App() {
 	)
 		window.location.assign('/signin');
 	return (
-		<Routes>
-			<Route path="/" element={<Landing />} />
-			<Route path="/signup" element={<Join />} />
-			<Route path="/signin" element={<Login />} />
-			<Route path="/todo" element={<Todo />} />
-			<Route path="/error" element={<Error />} />
-		</Routes>
+		<Suspense fallback={<Loading />}>
+			<Routes>
+				<Route path="/" element={<Landing />} />
+				<Route path="/signup" element={<Join />} />
+				<Route path="/signin" element={<Login />} />
+				<Route path="/todo" element={<Todo />} />
+				<Route path="/error" element={<Error />} />
+			</Routes>
+		</Suspense>
 	);
 }
 
