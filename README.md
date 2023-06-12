@@ -12,26 +12,27 @@
 ├── 📂 util
 │   ├── 📄 customAPI.ts
 │   ├── 📄 Localstorage.ts
-├── 📂 hooks
+│   ├── 📄 SweetAlert.ts
+│   ├── 📄 ToastAlert.ts
+├── 📂 components
+│   ├── 📄 Logout.tsx
 ├── 📂 pages
 │   ├── 📄 Landing.tsx
+│   ├── 📄 Loading.tsx
 │   ├── 📄 Join.tsx
 │   ├── 📄 Login.tsx
 │   ├── 📄 Todo.tsx
 │   └── 📄 Error.tsx
-└── 📄 App.tsx
-└── 📄 Index.tsx
+├── 📄 App.tsx
+├── 📄 Index.tsx
 └── 📄 Global.css
 
 ```
 
 # 3. 기능 시연 GIF
-https://github.com/hihijin/wanted-pre-onboarding-frontend/assets/117073214/caf64baf-6551-4178-9e05-f7efbd01ab50
-
-https://github.com/hihijin/wanted-pre-onboarding-frontend/assets/117073214/a771be4f-1cb3-4eae-a2c4-416d66f243b0
-
 
 ## ⭐️ 로그인 , 회원가입
+![member](https://github.com/hihijin/wanted-pre-onboarding-frontend/assets/117073214/57c3bc8f-37d2-49e2-964f-58cb8b0b86f4)
 
 ✅ Assignment1
 
@@ -49,7 +50,7 @@ https://github.com/hihijin/wanted-pre-onboarding-frontend/assets/117073214/a771b
 - 로컬 스토리지에 토큰이 없는 상태로 /todo페이지에 접속한다면 / 경로로 리다이렉트
 
 ## ⭐️ Todo List
-
+![todo](https://github.com/hihijin/wanted-pre-onboarding-frontend/assets/117073214/3e451a51-8aed-4e96-b78a-d0abdea9bc38)
 
 ✅ Assignment4
 
@@ -70,7 +71,7 @@ https://github.com/hihijin/wanted-pre-onboarding-frontend/assets/117073214/a771b
 
 ## ⭐️ 성능 최적화
 
-<img src="https://user-images.githubusercontent.com/86206374/196598915-73372383-cccb-414a-b16b-78a9f165ffab.gif" width="500" height="450"/>
+![Lighthouse](https://github.com/hihijin/wanted-pre-onboarding-frontend/assets/117073214/b8b7a381-2475-45c8-9008-4952c2f55259)
 
 # 4. 프로젝트 설치 및 실행
 
@@ -88,11 +89,12 @@ npm start
 
 # 5. 사용 라이브러리
 
-Axios
-react-router-dom
-typescript
-styled-components
-eslint
-prettier
-
-
+Axios <br/>
+react-router-dom <br/>
+typescript <br/>
+styled-components <br/>
+eslint <br/>
+prettier <br/>
+sweetalert2 <br/>
+react-spinners <br/>
+styled-normalize
